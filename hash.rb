@@ -24,3 +24,11 @@ p cart.values
 p cart.value?(1)
 #Can also use .value_key?
 
+#Methods
+p cart.length #No. of key-value pairs
+
+p cart.shift #Changes hash, deletes first k-v pair
+p cart
+
+p cart.merge({"name" => "bread"}) #Keeps cart unchanges, creates new hash
+#NB merged k-v pair has precedence
