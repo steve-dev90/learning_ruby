@@ -1,6 +1,8 @@
 cart = Hash.new
 p cart
+# To initialise a hash
 cart = {"name" => "bread", "quantity" => 1}
+
 #To access a value, use the key 
 p cart["name"] #prints bread
 
