@@ -7,7 +7,8 @@ bags = %w(green, bown)
 p bags
 item = "wand"
 magic_list =[]
-magic_list = %W(#{item} rabbit)
+#Use %W for string interpolation
+magic_list = %W(#{item} rabbit) 
 p magic_list
 # << adds items to end of array
 magic_list << 5
