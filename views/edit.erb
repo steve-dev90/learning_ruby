@@ -1,0 +1,14 @@
+<h1> Edit <%= @title %> </h1>
+
+<div>
+    <form method="post" action="/<%= @title %>">
+        <input type="hidden" name="_method" value="put"
+        <fieldset>
+            <label for="content">Content</label>
+            <textarea rows="10" columns="50" name= "content" id="content"><%= @content %></textarea>
+        </fieldset>
+        <input type="submit">
+    </form>
+</div>
+
+<p>Return to wiki page <a href = "."> here </a> </p>
