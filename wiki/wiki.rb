@@ -1,11 +1,14 @@
-require 'sinatra'
-require 'uri'
+require 'sinatra' #This is a cut down ruby framework
+require 'uri' #Used for correctly encoding URLs
 
-#This is the root directory
-get '/' do
-    #renders html in /views/welcome
-    erb :welcome 
-end   
+#SECURITY
+#To escape any HTML that might appear in a string
+#Thus avoiding a user inputting malacious JS
+def h(string)
+    Rack::Utils.escape_html(string)
+end
+
+#WIKI PAGE MANAGEMENT  
 
 def page_content(title)
     File.read("pages/#{title}.txt")
@@ -19,11 +22,25 @@ def save_content(title, content)
     File.open("pages/#{title}.txt", "w") do |file|
       file.print(content)
     end
-  end
+end
+
+def delete_content(title)
+    File.delete("pages/#{title}.txt") 
+end
+
+#HTML REQUESTS
+
+#This is the root directory
+get '/' do
+    #renders html in /views/welcome
+    erb :welcome, layout: :template #layout applies template erb
+    #Can also just rename template.erb to layout.erb and then remove the second
+    #parameter.  
+end 
 
 get '/new' do
     #Render the new erb file in the views folder
-    erb :new
+    erb :new, layout: :template
 end    
 
 get '/:title' do
@@ -53,3 +70,8 @@ put '/:title' do
     #accept empty spaces.
     redirect URI.escape("/#{params["title"]}")
 end
+
+delete '/:title' do
+    delete_content(params[:title])
+    redirect '/'
+end    
